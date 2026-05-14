@@ -1,0 +1,90 @@
+/* //txs Modal */
+.buttonStyle {
+  flex: 1;
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.cardproduc {
+  background-color: white;
+  padding: 20px;
+  width: 400px;
+  border-radius: 10px;
+}
+
+.modalcard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* tsx From */
+
+.input {
+  padding: 10px;
+}
+
+.divcreateP {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.success {
+  color: green;
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.onSubmit {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+/* Product Card tsx */
+.delet {
+  flex: 1;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  background-color: red;
+  color: white;
+}
+
+.divCard {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.imaCard {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* App */
+
+.divApp {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
