@@ -15,7 +15,7 @@ type Props = {
 };
 
 //product visualization
-function ProductFrom({
+export function ProductFrom({
   setTitle,setPrice,setCategory,error,
   success, title,price,category,onSubmit,
 }: Props) {
@@ -66,4 +66,4 @@ function ProductFrom({
   );
 }
 
-export default ProductFrom;
+

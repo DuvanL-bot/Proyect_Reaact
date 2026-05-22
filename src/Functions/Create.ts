@@ -22,12 +22,12 @@ export function CreateProducts({
   if (!title || !price || !category) { setError("All fields are required"); return; }
 
   const newProduct: Product = {
-    id: Date.now(),
-    title,
-    price: Number(price),
-    category,
-    thumbnail: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-    description: "New product",
+    id_product: Date.now(),
+    title_product:title,
+    price_product: Number(price),
+    category_details: category,
+    thumbnail_product: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+    description_product: "New product",
   };
 
   const updatedProducts = [newProduct, ...products];

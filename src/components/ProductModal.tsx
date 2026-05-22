@@ -20,22 +20,19 @@ export function ProductModal({
     setSelectedProduct(null);
   }
 
-
-  return (//review
+  return (
+    //review
     <div className={styles.modalcard} onClick={closeModal}>
       <div className={styles.cardproduc} onClick={(e) => e.stopPropagation()}>
         <img
-          src={selectedProduct.thumbnail}
-          alt={selectedProduct.title}
-          style={{
-            width: "100%",
-            marginBottom: "20px",
-          }}
+          src={selectedProduct.thumbnail_product}
+          alt={selectedProduct.title_product}
+          style={{ width: "100%", marginBottom: "20px" }}
         />
-
-        <h2>{selectedProduct.title}</h2>
-        <p>{selectedProduct.description}</p>
-        <h3>${selectedProduct.price}</h3>
+        
+        <h2>{selectedProduct.title_product}</h2>
+        <p>{selectedProduct.description_product}</p>
+        <h3>${selectedProduct.price_product}</h3>
 
         <button className={styles.buttonStyle} onClick={closeModal}>
           Close

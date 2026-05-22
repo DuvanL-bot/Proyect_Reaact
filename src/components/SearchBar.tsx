@@ -19,10 +19,10 @@ export function SearchBar({ products, search, setSearch, sortOrder, setSortOrder
     let result = [...products];
     if (search.trim() !== "") {
       result = result.filter((p) =>
-        p.title.toLowerCase().includes(search.toLowerCase())
+        p.title_product.toLowerCase().includes(search.toLowerCase())
       );
     }
-    result.sort((a, b) => sortOrder === "asc" ? a.price - b.price : b.price - a.price);
+    result.sort((a, b) => sortOrder === "asc" ? a.price_product - b.price_product : b.price_product - a.price_product);
     setFiltered(result);
   }, [products, search, sortOrder, setFiltered]);
 

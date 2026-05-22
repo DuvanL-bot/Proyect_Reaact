@@ -1,3 +1,5 @@
+//Backend
+const API_URL = "http://localhost:3006/products";
 //Import Functions
 import type { Product } from "./types";
 
@@ -9,25 +11,57 @@ interface LoadProductsArgs {
 }
 
 //Function Get
-async function loadProducts({ setProducts, setLoading, setError }: LoadProductsArgs) {
+export async function loadProducts({
+  setProducts,
+  setLoading,
+  setError,
+}: LoadProductsArgs) {
   try {
-    setLoading(true); 
-    const response = await fetch("https://dummyjson.com/products");//Api Rest
+    setLoading(true);
+    const response = await fetch(`${API_URL}`); //Api Rest
     if (!response.ok) throw new Error("Error loading products");
 
     const data = await response.json();
-    setProducts(data.products);
-    localStorage.setItem("products_backup", JSON.stringify(data.products));
+    setProducts(data);
+    // localStorage.setItem("products_backup", JSON.stringify(data.products));
   } catch (erro) {
-    const backup = localStorage.getItem("products_backup");//local backup Storage
-    if (backup) {
-      setProducts(JSON.parse(backup));
-    } else {
-      setError(erro +"Error loading products");
-    }
+    setError("Error loading productos" + erro);
   } finally {
     setLoading(false);
   }
 }
 
-export default loadProducts;
+// POST
+export async function createProduct(
+  product: Omit<Product, "id">,
+): Promise<Product> {
+  const res = await fetch(`${API_URL}/products`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(product),
+  });
+  if (!res.ok) throw new Error("Error al crear producto");
+  return res.json();
+}
+
+// DELETE
+export async function removeProduct(id: number): Promise<void> {
+  const res = await fetch(`${API_URL}/products/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Error al eliminar producto");
+}
+
+// PUT
+export async function updateProduct(
+  id: number,
+  product: Partial<Product>,
+): Promise<Product> {
+  const res = await fetch(`${API_URL}/products/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(product),
+  });
+  if (!res.ok) throw new Error("Error al actualizar producto");
+  return res.json();
+}
