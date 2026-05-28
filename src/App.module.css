@@ -1,3 +1,10 @@
+/* global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* //txs Modal */
 .buttonStyle {
   flex: 1;
@@ -89,52 +96,425 @@
   gap: 20px;
 }
 
-/* Ocultar */
-.display {
-  display: none;
-}
-
 /* formulario */
-
 .formularioregistre {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .fromregistre {
-  background-color: rgb(0, 0, 0);
-  padding: 30px;
+  width: 350px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  height: 300px;
-  width: 250px;
-  border-radius: 5px;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 0 15px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.fromregistre:hover {
+  transform: translateY(-5px);
+}
+
+.tituloregistre {
+  color: white;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
 }
 
 .labelregistre {
-  display: block;
-  color: #ddd;
-  margin-bottom: 5px;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .inputregistre {
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: none;
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  outline: none;
+  transition:
+    border 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
 }
 
-.buttonregistre{
-  padding: 10px 25px;
-  border: none;
-  border-radius: 5px;
-  transition: .3s ease;
-  cursor: pointer;
+.inputregistre::placeholder {
+  color: #cbd5e1;
 }
-.buttonregistre:hover{
-  color: gray;
+
+.inputregistre:focus {
+  border: 1px solid #38bdf8;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.buttonregistre {
+  margin-top: 10px;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.buttonregistre:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.5);
+}
+
+.buttonregistre:active {
+  transform: scale(0.98);
+}
+
+.textoregistre {
+  text-align: center;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.linkregistre {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.linkregistre:hover {
+  text-decoration: underline;
+}
+
+/* button ocultar password */
+
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+.passwordWrapper .inputregistre {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.eyeButton:hover {
+  color: #333;
+}
+
+/* NAVBAR */
+
+.headerContainer {
+  background: rgba(15, 23, 42, 0.98);
+  backdrop-filter: blur(12px);
+  padding: 12px 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fila Superior */
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.brandLogo {
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+}
+
+.brandLogo span {
+  color: #38bdf8;
+}
+
+/* Accesos rápidos de la derecha */
+.quickActions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.actionLinkItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.actionLinkItem:hover {
+  color: #38bdf8;
+}
+
+.actionIcon {
+  font-size: 18px;
+}
+
+.bottomNav {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 10px;
+}
+
+.horizontalNavList {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+}
+
+.horizontalNavItem {
+  position: relative;
+}
+
+.navMenuLink {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 4px 0;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.navMenuLink:hover {
+  color: #38bdf8;
+}
+
+/* Línea indicadora interactiva moderna debajo del link activo/hover */
+.navMenuLink::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #38bdf8;
+  transition: width 0.3s ease;
+}
+.navMenuLink:hover::after {
+  width: 100%;
+}
+/* Cart */
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+  padding-bottom: 1rem;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.count {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+}
+
+.itemImage {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
+  background: var(--color-background-secondary);
+}
+
+.itemTitle {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  color: var(--color-text-primary);
+}
+
+.itemCategory {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.itemPrice {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  color: var(--color-text-primary);
+  text-align: right;
+}
+
+.itemRemove {
+  font-size: 11px;
+  color: var(--color-text-danger);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: right;
+  display: block;
+  width: 100%;
+}
+
+.itemRemove:hover {
+  opacity: 0.7;
+}
+
+.footer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summary {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-lg);
+  padding: 1rem 1.25rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  padding: 4px 0;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 0.5px solid var(--color-border-tertiary);
+}
+
+.btnCheckout {
+  width: 100%;
+  padding: 13px;
+  background: var(--color-text-primary);
+  color: var(--color-background-primary);
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.btnCheckout:hover {
+  opacity: 0.85;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+/* like */
+.like {
+  background: none;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Add Cart */
+.Cartbutton {
+  position: relative;
+  background: none;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

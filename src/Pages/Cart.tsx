@@ -1,6 +1,7 @@
-import { NavigationBar } from "../components/navigationBar";
 import { useEffect } from "react";
 import type { Product } from "../services/types";
+import style from "../App.module.css";
+import { NavigationBar } from "../components/navigationBar";
 
 type Props = {
   cart: Product[];
@@ -14,7 +15,7 @@ export default function Cart({ cart, setCart }: Props) {
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
-  }, []);
+  }, [setCart]);
 
   function removeFromCart(id_product: number) {
     const updated = cart.filter((p) => p.id_product !== id_product);
@@ -22,7 +23,10 @@ export default function Cart({ cart, setCart }: Props) {
     localStorage.setItem("cart", JSON.stringify(updated));
   }
 
-  const total = cart.reduce((sum, product) => sum + product.price_product, 0);
+  const total = cart.reduce(
+    (sum, product) => sum + Number(product.price_product),
+    0,
+  );
 
   if (cart.length === 0)
     return (
@@ -35,40 +39,63 @@ export default function Cart({ cart, setCart }: Props) {
   return (
     <div>
       <NavigationBar />
-      <h1>🛒 Cart</h1>
+      <div className={style.container}>
+        <div className={style.header}>
+          <h1 className={style.title}>Cart</h1>
+          <span className={style.count}>{cart.length} items</span>
+        </div>
 
-      <div style={{ padding: "20px" }}>
-        <h1>Carrito</h1>
-
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          {cart.map((product, index) => (
-            <li
-              key={`${product.id_product}-${index}`}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "10px",
-                borderBottom: "1px sol #ddd",
-              }}
-            >
-              <span>{product.title_product}</span>
-              <span>${product.price_product}</span>
-              <button
-                onClick={() => removeFromCart(product.id_product)}
-                style={{
-                  background: "red",
-                  color: "white",
-                  border: "none",
-                  padding: "5px 10px",
-                }}
+        {cart.length === 0 ? (
+          <p className={style.emptyState}>No hay productos en el carrito.</p>
+        ) : (
+          <>
+            {cart.map((product, index) => (
+              <div
+                key={`${product.id_product}-${index}`}
+                className={style.item}
               >
-                Eliminar
-              </button>
-            </li>
-          ))}
-        </ul>
+                <img
+                  src={product.thumbnail_product}
+                  alt={product.title_product}
+                  className={style.itemImage}
+                />
+                <div>
+                  <p className={style.itemTitle}>{product.title_product}</p>
+                  <p className={style.itemCategory}>
+                    {product.category_details}
+                  </p>
+                </div>
+                <div>
+                  <p className={style.itemPrice}>${product.price_product}</p>
+                  <button
+                    onClick={() => removeFromCart(product.id_product)}
+                    className={style.itemRemove}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
 
-        <h2 style={{ marginTop: "20px" }}>Total: ${total.toFixed(2)}</h2>
+            <div className={style.footer}>
+              <div className={style.summary}>
+                <div className={style.summaryRow}>
+                  <span>Subtotal</span>
+                  <span>${total.toFixed(2)}</span>
+                </div>
+                <div className={style.summaryRow}>
+                  <span>Shipping</span>
+                  <span>Free</span>
+                </div>
+                <div className={style.summaryTotal}>
+                  <span>Total</span>
+                  <span>${total.toFixed(2)}</span>
+                </div>
+              </div>
+              <button className={style.btnCheckout}>Checkout</button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

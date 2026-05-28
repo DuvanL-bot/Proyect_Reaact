@@ -19,11 +19,24 @@ export function ProductCard({
   product,
   onOpenModal,
   onDelete,
-  cart,
+  cart = [],      
   setCart,
-  like,
+  like = [], 
   setlike,
 }: Props) {
+
+   const isLiked = like.some((p) => p.id_product === product.id_product);
+
+   function handlelike() {
+    if (isLiked) {
+      const updated = like.filter((p)=>p.id_product !== product.id_product)
+     setlike(updated);
+      localStorage.setItem("like", JSON.stringify(updated));
+    } else {
+      addTolike({ product, like, setlike });
+    }
+   }
+
   return (
     //Buttons
     <div className={style.divCard}>
@@ -53,12 +66,29 @@ export function ProductCard({
             Delete
           </button>
 
-          <button onClick={() => addToCart({ product, cart, setCart })}>
-            add
+          <button className={style.Cartbutton}
+           onClick={() => addToCart({ product, cart, setCart })}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
           </button>
 
-          <button onClick={() => addTolike({ product, like, setlike })}>
-            like
+          <button className={style.like} onClick={handlelike}>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill={isLiked ? "#e24b4a" : "none"}
+              stroke={isLiked ? "#e24b4a" : "currentColor"}
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ transition: "fill 0.2s ease, stroke 0.2s ease" }}
+            >
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+            </svg>
           </button>
         </div>
       </div>

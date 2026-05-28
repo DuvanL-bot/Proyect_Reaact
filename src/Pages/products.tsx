@@ -5,7 +5,7 @@ import { NavigationBar } from "../components/navigationBar";
 import { ProductCard } from "../Imports/importComp";
 import style from "../App.module.css";
 
-export function ProductsId() {
+export function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
