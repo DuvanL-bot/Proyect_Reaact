@@ -1,14 +1,17 @@
+//Import
 import { NavigationBar } from "../components/navigationBar";
 import { useEffect } from "react";
 import type { Product } from "../services/types";
 import style from "../App.module.css";
 import { addTolike } from "../Functions/addTolike";
 
+//types
 type Props = {
   like: Product[];
   setlike: React.Dispatch<React.SetStateAction<Product[]>>;
 };
 
+//functioin favorite Page
 export function Favorites({ like, setlike }: Props) {
   useEffect(() => {
     const savelike = localStorage.getItem("like");
@@ -18,6 +21,7 @@ export function Favorites({ like, setlike }: Props) {
     }
   }, [setlike]);
 
+  //function Button like
   function handlelike(product: Product) {
     const isLiked = like.some((f) => f.id_product === product.id_product);
 
@@ -35,7 +39,14 @@ export function Favorites({ like, setlike }: Props) {
 
   return (
     <div>
-      <NavigationBar />
+      {/* style favorite */}
+      <NavigationBar 
+              sortOrder={sortOrder}
+        setSortOrder={setSortOrder}
+        products={products}
+        search={search}
+        setSearch={setSearch}
+        setFiltered={setFiltered}/>
 
       <div style={{ padding: "20px" }}>
         <h1>Favorites</h1>
@@ -47,6 +58,7 @@ export function Favorites({ like, setlike }: Props) {
             );
 
             return (
+              // desing info product
               <li key={product.id_product} style={{ marginBottom: "20px" }}>
                 <img
                   src={product.thumbnail_product}
@@ -55,9 +67,9 @@ export function Favorites({ like, setlike }: Props) {
                 />
 
                 <p>{product.title_product}</p>
-
                 <p>${product.price_product}</p>
 
+                {/* button heart */}
                 <button
                   className={style.like}
                   onClick={() => handlelike(product)}

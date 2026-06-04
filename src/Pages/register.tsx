@@ -1,3 +1,4 @@
+//import
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "../App.module.css";
@@ -36,6 +37,11 @@ export function Register() {
   return (
     <div>
       <div className={style.formularioregistre}>
+        <button className={style.buttonlogin}
+        type="button"
+        onClick={()=>navigate("/")}>
+          Login
+        </button>
         <form className={style.fromregistre} onSubmit={handleRegister}>
           <h2 className={style.tituloregistre}>Register</h2>
           <label className={style.labelregistre} htmlFor="name">

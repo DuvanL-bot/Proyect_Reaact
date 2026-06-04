@@ -1,6 +1,6 @@
 import { Home } from "./Pages/Home";
-import { Route, Routes } from "react-router-dom"; // Se eliminó useNavigate
-import Cart from "./Pages/Cart";
+import { Route, Routes } from "react-router-dom";
+import { Cart } from "./Pages/Cart";
 import { Favorites } from "./Pages/favorites";
 import { Products } from "./Pages/products";
 import { ForgetPassword } from "./Pages/ForgetPassword";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import type { Product } from "./services/types";
 import { Register } from "./Pages/register";
 import { ProtectedRoute } from "./components/ProtectedRouter";
+import {Changespassword}  from "./Pages/changes-Password";
 import { Login } from "./Pages/login";
 
 export default function App() {
@@ -36,6 +37,10 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/changes-password" element={<Changespassword/>} /> 
+
         <Route
           path="/cart"
           element={

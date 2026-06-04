@@ -1,0 +1,7 @@
+export {Cart} from "../Pages/Cart"
+export {ForgetPassword} from "../Pages/ForgetPassword"
+export {Home} from "../Pages/Home"
+export {Favorites} from "../Pages/favorites"
+export {Login} from "../Pages/login"
+export {Products} from "../Pages/products"
+export {Register} from "../Pages/register"

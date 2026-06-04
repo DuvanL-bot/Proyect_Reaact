@@ -283,6 +283,58 @@
   color: #38bdf8;
 }
 
+.searchWrapper {
+  flex: 1;
+  max-width: 650px;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  padding: 4px 6px 4px 20px;
+  transition: all 0.3s ease;
+}
+
+.searchForm:focus-within {
+  border-color: #38bdf8;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+
+.searchInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 14px;
+}
+
+.searchInput::placeholder {
+  color: #94a3b8;
+}
+
+.sortSelect {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  padding: 8px 14px;
+  border-radius: 50px;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s;
+  margin-left: 10px;
+}
+
+.sortSelect:hover {
+  background: #334155;
+  border-color: #38bdf8;
+}
+
 /* Accesos rápidos de la derecha */
 .quickActions {
   display: flex;
@@ -316,7 +368,7 @@
 
 .horizontalNavList {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   gap: 40px;
   list-style: none;
@@ -517,4 +569,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* button regiter and login */
+.buttonlogin {
+  position: absolute;
+  right: 5px;
+  margin-top: -540px;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.buttonlogin:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.5);
+}
+
+.buttonlogin:active {
+  transform: scale(0.98);
 }

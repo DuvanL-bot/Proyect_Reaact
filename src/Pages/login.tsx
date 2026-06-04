@@ -1,8 +1,10 @@
+//Imports
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginService } from "../services/auth";
 import style from "../App.module.css";
 
+// function login count
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,6 +12,7 @@ export function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  //function check information
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setError("");
@@ -30,8 +33,17 @@ export function Login() {
 
   return (
     <div className={style.formularioregistre}>
+      <button
+        className={style.buttonlogin}
+        type="button"
+        onClick={() => navigate("/register")}
+      >
+        Register
+      </button>
       <form onSubmit={handleLogin} className={style.fromregistre}>
         <h2 className={style.tituloregistre}>Login</h2>
+
+        {/* info input */}
         <input
           className={style.inputregistre}
           type="email"
@@ -48,6 +60,7 @@ export function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
+          {/* button eye view and disguise */}
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -77,9 +90,13 @@ export function Login() {
             )}
           </button>
         </div>
+
+        {/* button check information database */}
         <button type="submit" className={style.buttonregistre}>
           Ingresar
         </button>
+
+        {/* button recover password */}
         <a href="/ForgetPassword">¿Olvidaste tu contraseña?</a>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>

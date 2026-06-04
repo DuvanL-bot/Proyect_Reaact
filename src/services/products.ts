@@ -23,7 +23,7 @@ export async function loadProducts({
 
     const data = await response.json();
     setProducts(data);
-    // localStorage.setItem("products_backup", JSON.stringify(data.products));
+    localStorage.setItem("products_backup", JSON.stringify(data.products));
   } catch (erro) {
     setError("Error loading productos" + erro);
   } finally {

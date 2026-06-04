@@ -1,14 +1,17 @@
+//Imports
 import { useEffect } from "react";
 import type { Product } from "../services/types";
 import style from "../App.module.css";
 import { NavigationBar } from "../components/navigationBar";
 
+//types
 type Props = {
   cart: Product[];
   setCart: React.Dispatch<React.SetStateAction<Product[]>>;
 };
 
-export default function Cart({ cart, setCart }: Props) {
+//Funciont get local stores Cart
+export  function Cart({ cart, setCart }: Props) {
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
 
@@ -17,6 +20,7 @@ export default function Cart({ cart, setCart }: Props) {
     }
   }, [setCart]);
 
+//Function Remove and Update Product Cart 
   function removeFromCart(id_product: number) {
     const updated = cart.filter((p) => p.id_product !== id_product);
     setCart(updated);
@@ -30,15 +34,19 @@ export default function Cart({ cart, setCart }: Props) {
 
   if (cart.length === 0)
     return (
+  <div>
+      <NavigationBar />
       <div style={{ padding: "20px" }}>
         <h1>Carrito</h1>
         <p>No hay productos en el carrito.</p>
       </div>
+      </div>
     );
 
   return (
+    //Style Cart
     <div>
-      <NavigationBar />
+      <NavigationBar/>
       <div className={style.container}>
         <div className={style.header}>
           <h1 className={style.title}>Cart</h1>

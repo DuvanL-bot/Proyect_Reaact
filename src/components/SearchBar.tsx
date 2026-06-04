@@ -1,6 +1,7 @@
 //Import Fuctions
-import { useEffect } from 'react';
-import type { Product } from '../services/types';
+import { useEffect, useRef } from "react";
+import type { Product } from "../services/types";
+import style from "../App.module.css";
 
 //type data
 type Props = {
@@ -10,43 +11,61 @@ type Props = {
   sortOrder: "asc" | "desc";
   setSortOrder: React.Dispatch<React.SetStateAction<"asc" | "desc">>;
   setFiltered: React.Dispatch<React.SetStateAction<Product[]>>;
-}
+};
 
-export function SearchBar({ products, search, setSearch, sortOrder, setSortOrder, setFiltered }: Props) {
+//Function Sarch
+export function SearchBar({
+  products,
+  search,
+  setSearch,
+  sortOrder,
+  setSortOrder,
+  setFiltered,
+}: Props) {
+
+  const setFilteredRef = useRef(setFiltered);
+  useEffect(() => {
+    setFilteredRef.current = setFiltered;
+  });
 
   // logic of filter
   useEffect(() => {
-    let result = [...products];
-    if (search.trim() !== "") {
-      result = result.filter((p) =>
-        p.title_product.toLowerCase().includes(search.toLowerCase())
+    let result = Array.isArray(products) ? [...products] : [];
+    if (search  && search.trim() !== "") {
+      result = result.filter(
+        (p) =>
+          p.title_product &&
+          p.title_product.toLowerCase().includes(search.toLowerCase()),
       );
     }
-    result.sort((a, b) => sortOrder === "asc" ? a.price_product - b.price_product : b.price_product - a.price_product);
-    setFiltered(result);
+    result.sort((a, b) => {
+      const priceA = a.price_product || 0;
+      const priceB = b.price_product || 0;
+      return sortOrder === "asc" ? priceA - priceB : priceB - priceA;
+    });
+
   }, [products, search, sortOrder, setFiltered]);
 
   // visual
   return (
-    <div>
-    <h1>Product Dashboard</h1>
-    <div style={{ marginBottom: "20px", display: "flex", gap: "10px" }}>
-      <input
-        type="text"
-        placeholder="Search product..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{ padding: "10px", width: "300px" }}
-      />
-      <select
-        value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
-        style={{ padding: "10px" }}
-      >
-        <option value="asc">Lowest price</option>
-        <option value="desc">Highest price</option>
-      </select>
-    </div>
+    <div className={style.searchWrapper}>
+      <div className={style.searchForm}>
+        <input
+          type="text"
+          placeholder="Search product..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className={style.searchInput}
+        />
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
+          className={style.sortSelect}
+        >
+          <option value="asc">Lowest price</option>
+          <option value="desc">Highest price</option>
+        </select>
+      </div>
     </div>
   );
 }

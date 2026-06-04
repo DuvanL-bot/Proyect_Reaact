@@ -1,3 +1,4 @@
+//imports
 import { useEffect, useState } from "react";
 import { loadProducts } from "../services/products";
 import type { Product } from "../services/types";
@@ -5,6 +6,7 @@ import { NavigationBar } from "../components/navigationBar";
 import { ProductCard } from "../Imports/importComp";
 import style from "../App.module.css";
 
+//function Products
 export function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
@@ -28,7 +30,8 @@ export function Products() {
 
   return (
     <div>
-      <NavigationBar />
+      <NavigationBar 
+      products={products}/>
       <div className={style.divApp}>
         {products.map((product, index) => (
           <ProductCard key={index} product={product} />

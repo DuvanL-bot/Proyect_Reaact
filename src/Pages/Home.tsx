@@ -1,16 +1,19 @@
 //Imposts
-import { ProductCard, ProductModal, ProductFrom } from "../Imports/importComp";
+import {
+  ProductCard,
+  ProductModal,
+  ProductFrom,
+  NavigationBar,
+  SearchBar,
+} from "../Imports/importComp";
 import { useEffect, useState } from "react";
 import { useUserProducts } from "../hooks/UserProducts";
-import { SearchBar } from "../components/SearchBar";
-import { CreateProducts } from "../Functions/Create";
-import { deleteProduct } from "../Functions/deleteProduct";
+import { CreateProducts, deleteProduct } from "../Imports/importFunctions";
 import { loadProducts } from "../services/products";
 import style from "../App.module.css";
-import { NavigationBar } from "../components/navigationBar";
 import type { Product } from "../services/types";
 
-
+//Function load products
 export function Home() {
   const {
     products,
@@ -37,8 +40,8 @@ export function Home() {
     setShowModal,
     setSelectedProduct,
   } = useUserProducts();
- const [cart, setCart] = useState<Product[]>([]);
- const [like, setlike] = useState<Product[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
+  const [like, setlike] = useState<Product[]>([]);
 
   //Effect
   useEffect(() => {
@@ -65,10 +68,20 @@ export function Home() {
   }
 
   if (loading) return <p>Cargando...</p>;
+
+  //desing
   return (
     <div className="container">
-      <NavigationBar />
+      <NavigationBar
+        sortOrder={sortOrder}
+        setSortOrder={setSortOrder}
+        products={products}
+        search={search}
+        setSearch={setSearch}
+        setFiltered={setFiltered}
+      />
 
+      {/* Search */}
       <SearchBar
         products={products}
         search={search}
@@ -78,6 +91,7 @@ export function Home() {
         setFiltered={setFiltered}
       />
 
+      {/* Visible product */}
       <ProductFrom
         title={title}
         price={price}
@@ -90,6 +104,7 @@ export function Home() {
         onSubmit={handleAddProduct}
       />
 
+      {/* product container */}
       <div className={style.divApp}>
         {filtered.map((product) => (
           <ProductCard
@@ -108,14 +123,15 @@ export function Home() {
                 setShowModal,
               })
             }
-              cart={cart}
-              setCart={setCart}
-              like={like}
-              setlike={setlike}
+            cart={cart}
+            setCart={setCart}
+            like={like}
+            setlike={setlike}
           />
         ))}
       </div>
 
+      {/* Product Modal */}
       {selectedProduct && (
         <ProductModal
           selectedProduct={selectedProduct}
@@ -126,5 +142,3 @@ export function Home() {
     </div>
   );
 }
-
-
