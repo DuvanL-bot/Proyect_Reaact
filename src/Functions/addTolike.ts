@@ -1,5 +1,6 @@
 //imports
 import type { Product } from "../services/types";
+import {keepFavPost} from"../services/addPagesFavCar";
 
 //types
 type AddTolikeProps = {
@@ -9,19 +10,14 @@ type AddTolikeProps = {
 };
 
 //function save information obtained from local stores
-export function addTolike({
-  product,
-  like,
-  setlike
-}: AddTolikeProps) {
-
+export async function addTolike({product,like,setlike}: AddTolikeProps) {
+  try{
+  await keepFavPost(product);
   const updatedlike = [...like, product];
-
   setlike(updatedlike);
 
-  localStorage.setItem(
-    "like",
-    JSON.stringify(updatedlike)
-  );
+  } catch (error) {
+    console.error("Error al agregar a favoritos:", error);
+  }
 }
 

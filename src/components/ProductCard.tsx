@@ -39,18 +39,22 @@ export function ProductCard({
   //desing container
   return (
     // info data
-    <div className={style.divCard}>
-      <img
-        src={product.thumbnail_product}
-        alt={product.title_product}
-        className={style.imaCard}
-      />
-      <div style={{ padding: "15px" }}>
-        <h3>{product.title_product}</h3>
-        <p>${product.price_product}</p>
-        <p>{product.description_product}</p>
-        <p>{product.category_details}</p>
-
+    <div className={style.favCard}>
+      <div className={style.favImageWrapper}>
+        <span className={style.favCategoryBadge}>
+          {product.category_details}
+        </span>
+        <img
+          src={product.thumbnail_product}
+          alt={product.title_product}
+          className={style.favImage}
+        />
+      </div>
+      <div className={style.favCardBody}>
+        <h3 >{product.title_product}</h3>
+        <p className={style.favCardPrice}>${product.price_product}</p>
+        <div className={style.favCardFooter} style={{ marginTop: "15px" }}></div>
+        <p className={style.favCardDesc}>{product.description_product}</p>
         {/* button modal */}
         <div style={{ display: "flex", gap: "10px", marginTop: "15px" }}>
           <button

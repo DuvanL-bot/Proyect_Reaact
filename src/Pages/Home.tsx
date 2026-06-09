@@ -4,7 +4,6 @@ import {
   ProductModal,
   ProductFrom,
   NavigationBar,
-  SearchBar,
 } from "../Imports/importComp";
 import { useEffect, useState } from "react";
 import { useUserProducts } from "../hooks/UserProducts";
@@ -12,6 +11,7 @@ import { CreateProducts, deleteProduct } from "../Imports/importFunctions";
 import { loadProducts } from "../services/products";
 import style from "../App.module.css";
 import type { Product } from "../services/types";
+
 
 //Function load products
 export function Home() {
@@ -48,6 +48,10 @@ export function Home() {
     loadProducts({ setProducts, setLoading, setError });
   }, [setError, setLoading, setProducts]);
 
+  useEffect(() => {
+  setFiltered(products);
+}, [products, setFiltered]);
+
   //Event
   function handleAddProduct(e: React.FormEvent) {
     e.preventDefault();
@@ -78,16 +82,6 @@ export function Home() {
         products={products}
         search={search}
         setSearch={setSearch}
-        setFiltered={setFiltered}
-      />
-
-      {/* Search */}
-      <SearchBar
-        products={products}
-        search={search}
-        setSearch={setSearch}
-        sortOrder={sortOrder}
-        setSortOrder={setSortOrder}
         setFiltered={setFiltered}
       />
 

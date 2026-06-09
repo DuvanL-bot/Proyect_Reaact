@@ -1,5 +1,6 @@
 //import
 import type { Product } from "../services/types";
+import { keepCartPost } from "../services/addPagesFavCar";
 
 //types
 type AddToCartProps = {
@@ -9,18 +10,13 @@ type AddToCartProps = {
 };
 
 //function save information obtained from local stores
-export  function addToCart({
-  product,
-  cart,
-  setCart
-}: AddToCartProps) {
+export async function addToCart({ product, cart, setCart }: AddToCartProps) {
+  try {
+    await keepCartPost(product);
+    const updatedCart = [...cart, product];
 
-  const updatedCart = [...cart, product];
-
-  setCart(updatedCart);
-
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(updatedCart)
-  );
+    setCart(updatedCart);
+  } catch (error) {
+    console.error( error);
+  }
 }

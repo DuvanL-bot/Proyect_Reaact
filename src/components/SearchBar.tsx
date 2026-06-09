@@ -43,8 +43,8 @@ export function SearchBar({
       const priceB = b.price_product || 0;
       return sortOrder === "asc" ? priceA - priceB : priceB - priceA;
     });
-
-  }, [products, search, sortOrder, setFiltered]);
+    //  setFilteredRef.current(result)
+  }, [products, search, sortOrder]);
 
   // visual
   return (

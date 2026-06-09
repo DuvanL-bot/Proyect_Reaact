@@ -9,6 +9,9 @@ import style from "../App.module.css";
 //function Products
 export function Products() {
   const [products, setProducts] = useState<Product[]>([]);
+  // const [filtered, setFiltered] = useState<Product[]>([]);  
+  // const [search, setSearch] = useState("");                  
+  // const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -30,11 +33,17 @@ export function Products() {
 
   return (
     <div>
-      <NavigationBar 
-      products={products}/>
+      <NavigationBar
+        // sortOrder={sortOrder}
+        // setSortOrder={setSortOrder}
+        // products={products}
+        // search={search}
+        // setSearch={setSearch}
+        // setFiltered={setFiltered}
+      />
       <div className={style.divApp}>
         {products.map((product, index) => (
-          <ProductCard key={index} product={product} />
+          <ProductCard key={index} product={product} onOpenModal={() => {}} />
         ))}
       </div>
     </div>

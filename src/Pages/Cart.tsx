@@ -3,28 +3,30 @@ import { useEffect } from "react";
 import type { Product } from "../services/types";
 import style from "../App.module.css";
 import { NavigationBar } from "../components/navigationBar";
+import {keepCartProduct,keepCartdelete}from "../services/addPagesFavCar"
 
 //types
 type Props = {
   cart: Product[];
   setCart: React.Dispatch<React.SetStateAction<Product[]>>;
 };
-
-//Funciont get local stores Cart
+//Funciont get local stores 
 export  function Cart({ cart, setCart }: Props) {
-  useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
-
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
-    }
+ useEffect(() => {
+    keepCartProduct()
+      .then(setCart)
+      .catch((err) => console.error("Error al cargar carrito:", err));
   }, [setCart]);
 
 //Function Remove and Update Product Cart 
-  function removeFromCart(id_product: number) {
-    const updated = cart.filter((p) => p.id_product !== id_product);
-    setCart(updated);
-    localStorage.setItem("cart", JSON.stringify(updated));
+  async function Cartdelete(id_product: number) {
+    try {
+      await keepCartdelete(id_product);
+      const updated = cart.filter((p) => p.id_product !== id_product);
+      setCart(updated);
+    } catch (error) {
+      console.error("Error al eliminar del carrito:", error);
+    }
   }
 
   const total = cart.reduce(
@@ -47,37 +49,37 @@ export  function Cart({ cart, setCart }: Props) {
     //Style Cart
     <div>
       <NavigationBar/>
-      <div className={style.container}>
-        <div className={style.header}>
-          <h1 className={style.title}>Cart</h1>
-          <span className={style.count}>{cart.length} items</span>
+      <div className={style.containerCart}>
+        <div className={style.headerCart}>
+          <h1 className={style.titleCart}>Cart</h1>
+          <span className={style.countCart}>{cart.length} items</span>
         </div>
 
         {cart.length === 0 ? (
-          <p className={style.emptyState}>No hay productos en el carrito.</p>
+          <p className={style.emptyStateCart}>No hay productos en el carrito.</p>
         ) : (
           <>
             {cart.map((product, index) => (
               <div
                 key={`${product.id_product}-${index}`}
-                className={style.item}
+                className={style.itemCart}
               >
                 <img
                   src={product.thumbnail_product}
                   alt={product.title_product}
-                  className={style.itemImage}
+                  className={style.itemImageCart}
                 />
                 <div>
-                  <p className={style.itemTitle}>{product.title_product}</p>
-                  <p className={style.itemCategory}>
+                  <p className={style.itemTitleCart}>{product.title_product}</p>
+                  <p className={style.itemCategoryCart}>
                     {product.category_details}
                   </p>
                 </div>
                 <div>
-                  <p className={style.itemPrice}>${product.price_product}</p>
+                  <p className={style.itemPriceCart}>${product.price_product}</p>
                   <button
-                    onClick={() => removeFromCart(product.id_product)}
-                    className={style.itemRemove}
+                    onClick={() => Cartdelete(product.id_product)}
+                    className={style.itemRemoveCart}
                   >
                     Remove
                   </button>
@@ -85,22 +87,22 @@ export  function Cart({ cart, setCart }: Props) {
               </div>
             ))}
 
-            <div className={style.footer}>
-              <div className={style.summary}>
-                <div className={style.summaryRow}>
+            <div className={style.footerCart}>
+              <div className={style.summaryCart}>
+                <div className={style.summaryRowCart}>
                   <span>Subtotal</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
-                <div className={style.summaryRow}>
+                <div className={style.summaryRowCart}>
                   <span>Shipping</span>
                   <span>Free</span>
                 </div>
-                <div className={style.summaryTotal}>
+                <div className={style.summaryTotalCart}>
                   <span>Total</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
               </div>
-              <button className={style.btnCheckout}>Checkout</button>
+              <button className={style.btnCheckoutCart}>Checkout</button>
             </div>
           </>
         )}

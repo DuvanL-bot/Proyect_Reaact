@@ -1,5 +1,6 @@
 //imports
 import { Link } from "react-router-dom";
+import { DarkMode } from "./dark mode";
 import { Route, Routes } from "react-router-dom";
 import { Favorites, Products, Cart } from "../Imports/importPages";
 import type { Product } from "../services/types";
@@ -73,7 +74,7 @@ export function NavigationBar({
             setSortOrder={resolvedSetSortOrder}
             setFiltered={resolvedSetFiltered}
           />
-
+          <DarkMode />
           {/* page favorite */}
           <div className={style.quickActions}>
             <Link to="/favorites" className={style.actionLinkItem}>
@@ -108,6 +109,7 @@ export function NavigationBar({
               </Link>
             </li>
           </ul>
+
         </nav>
       </header>
     </>
